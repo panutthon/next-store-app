@@ -1,26 +1,10 @@
-import { Typography, Button } from "@mui/material";
+'use client';
+
 import React from "react";
-import { AddCircleOutline as AddIcon } from "@mui/icons-material";
+import Banner from "@/app/components/front/banner/Banner";
 
-type Props = {}
-
-export default function HomePage({}: Props) {
+export default function HomePage() {
   return (
-    <>
-      <Typography variant="h1">Home</Typography>
-      <Button variant="contained" color="primary">
-        Click me
-      </Button>
-
-      {/* Icons */}
-      <div>
-        <AddIcon color="primary" />
-        <AddIcon color="secondary" />
-        <AddIcon color="info" />
-        <AddIcon color="warning" />
-        <AddIcon color="error" />
-        <AddIcon color="success" />
-      </div>
-    </>
+      <Banner />
   )
 }
