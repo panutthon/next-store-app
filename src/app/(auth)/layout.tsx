@@ -1,6 +1,3 @@
-import Header from "@/app/components/front/header/Header"
-import Footer from "@/app/components/front/footer/Footer"
-
 export default function AuthLayout({
     children,
   }: Readonly<{
@@ -9,9 +6,7 @@ export default function AuthLayout({
     return (
       <html lang="en">
         <body>
-            <Header />
             {children}
-            <Footer />
         </body>
       </html>
     )
