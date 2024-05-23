@@ -1,33 +1,26 @@
-"use client";
+"use client"
 
-import { Roboto } from "next/font/google";
-import { createTheme } from "@mui/material/styles";
-import { Colors } from "./colors";
-
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
-
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
+import { createTheme } from "@mui/material/styles"
+import { Colors } from "./Colors"
+import { shadows } from "./Shadows"
+import typography from "./Typography"
 
 const theme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: Colors.primary, // Your primary color
+      main: Colors.primary,
+      light: Colors.light,
+      dark: Colors.primary,
     },
     secondary: {
-      main: Colors.secondary, // Your secondary color
+      main: Colors.secondary,
+      light: Colors.light,
+      dark: Colors.secondary,
     },
   },
-  typography: {
-    fontFamily: roboto.style.fontFamily,
-  },
-});
+  shadows: shadows,
+  typography: typography,
+})
 
-export default theme;
+export default theme
