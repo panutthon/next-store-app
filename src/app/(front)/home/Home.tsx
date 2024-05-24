@@ -1,14 +1,16 @@
-"use client";
+'use client'
 
-import React from "react";
-import Banner from "@/app/components/front/banner/Banner";
-import Frameworks from "@/app/components/front/frameworks/Frameworks";
+import React from 'react'
+import Frameworks from '@/app/components/front/frameworks/Frameworks'
+import Banner from '@/app/components/front/banner/Banner'
 
-export default function HomePage() {
+type Props = {}
+
+export default function HomePage({}: Props) {
   return (
     <>
       <Banner />
       <Frameworks />
     </>
-  );
+  )
 }
