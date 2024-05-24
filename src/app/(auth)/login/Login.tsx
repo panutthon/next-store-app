@@ -37,7 +37,7 @@ export default function LoginPage({}: Props) {
           <Box px={4} py={4}>
             <Link href='/'>
               <Image
-                    src={"/images/logos/dark-logo.svg"}
+                    src={"/images/logos/NextStoreLogo.svg"}
                     alt="logo"
                     height={40}
                     width={174}

@@ -8,7 +8,9 @@ export const metadata: Metadata = {
     keywords: ['Forgot Password', 'Next.js'],
 }
 
-export default function Forgotpass() {
+type Props = {}
+
+export default function Forgotpass({}: Props) {
   return (
     <ForgotpassPage />
   )
