@@ -2,7 +2,7 @@ import React from 'react'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
-import logoIcon from '/public/images/logos/dark-logo.svg'
+import logoIcon from '/public/images/logos/NextStoreLogoIcon.svg'
 import Image from 'next/image'
 import Link from 'next/link'
 

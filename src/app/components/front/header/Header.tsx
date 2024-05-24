@@ -40,7 +40,7 @@ export default function Header() {
             <ToolbarStyled>
                 <Link href='/'>
                     <Image
-                        src={"/images/logos/dark-logo.svg"}
+                        src={"/images/logos/NextStoreLogo.svg"}
                         alt="logo"
                         height={40}
                         width={174}
@@ -66,7 +66,7 @@ export default function Header() {
                                 color='inherit'
                                 href='/'
                                 variant='text'
-                                LinkComponent={Link}
+                                LinkComponent={Link} //single page application
                             >
                                 Home
                             </ButtonStyled>
