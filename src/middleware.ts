@@ -44,6 +44,6 @@ export const config = {
         "/reset-password",
         "/maintenance",
         "/coming-soon",
-        "/backend/:path*",
+        // "/backend/:path*",
     ]
 }
