@@ -8,53 +8,53 @@ import {
   Divider,
   Alert,
   FormControlLabel,
-  FormGroup
-} from '@mui/material'
-import * as Icons from "@mui/icons-material"
+  FormGroup,
+} from "@mui/material";
+import * as Icons from "@mui/icons-material";
 
 // Other Components
-import { loginType } from "@/app/(auth)/types/auth"
-import CustomCheckbox from "@/app/components/forms/theme-elements/CustomCheckbox"
-import CustomTextField from "@/app/components/forms/theme-elements/CustomTextField"
-import CustomFormLabel from "@/app/components/forms/theme-elements/CustomFormLabel"
-import AuthSocialButtons from "./AuthSocialButtons"
+import { loginType } from "@/app/(auth)/types/auth";
+import CustomCheckbox from "@/app/components/forms/theme-elements/CustomCheckbox";
+import CustomTextField from "@/app/components/forms/theme-elements/CustomTextField";
+import CustomFormLabel from "@/app/components/forms/theme-elements/CustomFormLabel";
+import AuthSocialButtons from "./AuthSocialButtons";
 
 // NextJS Components
-import Link from "next/link"
-import { useRouter } from 'next/navigation'
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 // React Hook Form and Yup for Form Validation
-import { Controller, useForm } from "react-hook-form"
-import * as Yup from "yup"
-import { yupResolver } from "@hookform/resolvers/yup"
+import { Controller, useForm } from "react-hook-form";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 // Import authAction
-import { login } from "@/app/services/actions/authAction"
+import { login } from "@/app/services/actions/authAction";
+import { useState } from "react";
 
 // Types or Interfaces
 type User = {
-  username: string
-  password: string
-}
+  username: string;
+  password: string;
+};
 
 export default function AuthLogin({ title, subtitle, subtext }: loginType) {
-
   // Router
-  const router = useRouter()
+  const router = useRouter();
 
   // Initial Values
   const initialValue: User = {
     username: "iamsamit", // iamsamit
     password: "Samit@1234", // Samit@1234
-  }
+  };
 
   // Form Validation Schema with Yup
   const formValidateSchema = Yup.object().shape({
     username: Yup.string().required("Username is required").trim(),
     password: Yup.string().required("Password is required").trim(),
-  })
+  });
 
-  // React Hook Form 
+  // React Hook Form
   const {
     control,
     handleSubmit,
@@ -62,21 +62,26 @@ export default function AuthLogin({ title, subtitle, subtext }: loginType) {
   } = useForm<User>({
     defaultValues: initialValue,
     resolver: yupResolver(formValidateSchema),
-  })
+  });
+
+  //login Status
+  const [loginStatus, setLoginStatus] = useState(""); // [state, setState
 
   // Handle Submit Login
   const onSubmitLogin = async (data: User) => {
     // Call Login Function
-    const response = await login(data)
-    console.log(response)
+    const response = await login(data);
+    console.log(response);
 
-    if(response.success) {
+    if (response.success) {
       // console.log("Login Success", response.data)
-      router.push("/backend/dashboard")
+      setLoginStatus("success");
+      router.push("/backend/dashboard");
     } else {
-      console.log("Login Failed", response.error)
+      setLoginStatus("error");
+      console.log("Login Failed", response.error);
     }
-  }
+  };
 
   return (
     <>
@@ -85,9 +90,7 @@ export default function AuthLogin({ title, subtitle, subtext }: loginType) {
           {title}
         </Typography>
       ) : null}
-
       {subtext}
-
       <AuthSocialButtons title="Sign in with" />
       <Box mt={3}>
         <Divider>
@@ -103,13 +106,24 @@ export default function AuthLogin({ title, subtitle, subtext }: loginType) {
           </Typography>
         </Divider>
       </Box>
-      <form 
+      
+      {/* Login Status */}
+      { loginStatus && (
+          <Alert severity={loginStatus == 'success' ? 'success':'error'} sx={{ mt: 2 }}>
+            <Typography variant="body2">
+              {loginStatus == 'success' ? 'Login Successfull' : 'Login Failed'}
+            </Typography>
+          </Alert>
+        )
+      }
+
+      
+      <form
         onSubmit={handleSubmit(onSubmitLogin)}
         noValidate
         autoComplete="off"
       >
         <Stack>
-
           <Box>
             <CustomFormLabel htmlFor="username">Username</CustomFormLabel>
             <Controller
@@ -136,11 +150,9 @@ export default function AuthLogin({ title, subtitle, subtext }: loginType) {
               )}
             />
 
-            {
-              errors.username?.message ? (
-                <Alert severity="error">{errors.username?.message}</Alert>
-              ) : null
-            }
+            {errors.username?.message ? (
+              <Alert severity="error">{errors.username?.message}</Alert>
+            ) : null}
           </Box>
 
           <Box>
@@ -169,11 +181,9 @@ export default function AuthLogin({ title, subtitle, subtext }: loginType) {
               )}
             />
 
-            {
-              errors.password?.message ? (
-                <Alert severity="error">{errors.password?.message}</Alert>
-              ) : null
-            }
+            {errors.password?.message ? (
+              <Alert severity="error">{errors.password?.message}</Alert>
+            ) : null}
           </Box>
 
           <Stack
@@ -200,7 +210,6 @@ export default function AuthLogin({ title, subtitle, subtext }: loginType) {
               Forgot Password ?
             </Typography>
           </Stack>
-
         </Stack>
         <Box>
           <Button
@@ -216,5 +225,5 @@ export default function AuthLogin({ title, subtitle, subtext }: loginType) {
       </form>
       {subtitle}
     </>
-  )
+  );
 }

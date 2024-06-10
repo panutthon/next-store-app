@@ -9,13 +9,14 @@ export async function middleware(request: NextRequest) {
                              request.nextUrl.pathname === '/forgotpass' || 
                              request.nextUrl.pathname === '/reset-password' || 
                              request.nextUrl.pathname === '/maintenance' || 
-                             request.nextUrl.pathname === '/coming-soon'
+                             request.nextUrl.pathname === '/coming-soon' || 
+                             request.nextUrl.pathname === '/twostep'
         // อ่าน token จาก cookie
-        // const token = request.cookies.get('token')?.value
-        const token = false // มี token แสดงว่าล็อกอินแล้ว
+        const token = request.cookies.get('token')?.value
+        // const token = false // มี token แสดงว่าล็อกอินแล้ว
 
         // ดูว่าเป็นหน้า public หรือไม่
-        console.log(token, isPublicPage)
+        // console.log(token, isPublicPage)
 
         // ถ้ามี token และเข้าหน้า public ให้ redirect ไปหน้า dashboard
         if(token && isPublicPage){
@@ -44,6 +45,7 @@ export const config = {
         "/reset-password",
         "/maintenance",
         "/coming-soon",
-        // "/backend/:path*",
+        "/twostep",
+        "/backend/:path*",
     ]
 }

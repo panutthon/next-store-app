@@ -6,8 +6,27 @@ import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { IconPower } from '@tabler/icons-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+
+// Import authAction
+import { logout } from "@/app/services/actions/authAction"
 
 export const Profile = () => {
+
+  // Router
+  const router = useRouter()
+
+  // Logout Function
+  async function handleLogout() {
+    const response = await logout()
+    if (response.success) {
+      // console.log(response)
+      router.push("/login")
+    } else {
+      console.log(response.error)
+    }
+  }
+
   const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up('lg'))
   const hideMenu = lgUp ? false : false
 
@@ -30,10 +49,9 @@ export const Profile = () => {
             <Tooltip title="Logout" placement="top">
               <IconButton
                 color="error"
-                component={Link}
-                href="/login"
                 aria-label="logout"
                 size="small"
+                onClick={handleLogout}
               >
                 <IconPower size="20" />
               </IconButton>
